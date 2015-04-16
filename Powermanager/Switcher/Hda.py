@@ -1,4 +1,5 @@
 import os
+from Powermanager.Command.Command import Command
 from Powermanager.Switcher.Switcher import Switcher
 import os.path
 
@@ -13,10 +14,10 @@ class Hda(Switcher):
         for device in self._devices:
             device_power_save = '%s/parameters/power_save' % device
             if os.path.isfile(device_power_save):
-                os.system("echo '1' > '%s'" % device_power_save)
+                (Command("echo '1' > '%s'" % device_power_save)).run()
 
     def perfomance(self):
         for device in self._devices:
             device_power_save = '%s/parameters/power_save' % device
             if os.path.isfile(device_power_save):
-                os.system("echo '0' > '%s'" % device_power_save)
+                (Command("echo '0' > '%s'" % device_power_save)).run()

@@ -6,8 +6,8 @@ from Powermanager import Powermanager as pm
 
 
 def main(argv):
-    manager = pm.Powermanager();
-    manager.process(bool(int(argv[0])))
+    manager = pm.Powermanager()
+    manager.process((argv[0] == "true"))
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import glob
 import os.path
+from Powermanager.Command.Command import Command
 
 from Powermanager.Switcher.Switcher import Switcher
 
@@ -22,7 +23,7 @@ class Usb(Switcher):
                     continue
 
             if os.path.isfile(device_power_control):
-                os.system("echo 'auto' > '%s' " % device_power_control)
+                (Command("echo 'auto' > '%s' " % device_power_control)).run()
 
     def perfomance(self):
         for device in self._devices:
@@ -34,4 +35,4 @@ class Usb(Switcher):
                 # if name.lower().strip() in self._ignore:
                 # continue
             if os.path.isfile(device_power_control):
-                os.system("echo 'on' > '%s' " % device_power_control)
+                (Command("echo 'on' > '%s' " % device_power_control)).run()

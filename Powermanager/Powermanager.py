@@ -1,3 +1,4 @@
+from Powermanager.Switcher.Cpu import Cpu
 from Powermanager.Switcher.Hda import Hda
 from Powermanager.Switcher.Sata import Sata
 from Powermanager.Switcher.Usb import Usb
@@ -11,6 +12,7 @@ class Powermanager():
     def __init__(self):
 
         self._switchers = [];
+        self._switchers.append(Cpu())
         self._switchers.append(Wlan())
         self._switchers.append(Pci())
         self._switchers.append(Usb())
