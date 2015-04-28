@@ -12,13 +12,17 @@ class Pci(Switcher):
         self._devices = glob.glob("/sys/bus/pci/devices/0000:*")
 
     def powersave(self):
+        commands = []
         for device in self._devices:
             power_control = "%s/power/control" % device
             if os.path.isfile(power_control):
-                (Command("echo 'auto' > '%s'; " % power_control)).run()
+                commands.append("echo 'auto' > '%s'; " % power_control)
+        return commands
 
     def perfomance(self):
+        commands = []
         for device in self._devices:
             power_control = "%s/power/control" % device
             if os.path.isfile(power_control):
-                (Command("echo 'on' > '%s'; " % power_control)).run()
+                commands.append("echo 'on' > '%s'; " % power_control)
+        return commands

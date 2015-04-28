@@ -7,17 +7,22 @@ import os.path
 __author__ = 'sensey'
 
 
-class Writeback(Switcher):
+# echo '1500' > '/proc/sys/vm/dirty_writeback_centisecs'
+
+class Watchdog(Switcher):
     def __init__(self):
-        self._devices = ["/proc/sys/vm/dirty_writeback_centisecs"]
+        self._devices = ["/proc/sys/kernel/nmi_watchdog"]
 
     def powersave(self):
+        commands = []
         for device in self._devices:
             if os.path.isfile(device):
-                (Command("echo '1500' > '%s' " % device)).run()
-
+                commands.append("echo '0' > '%s' " % device)
+        return commands
 
     def perfomance(self):
+        commands = []
         for device in self._devices:
             if os.path.isfile(device):
-                (Command("echo '0' > '%s' " % device)).run()
+                commands.append("echo '1' > '%s' " % device)
+        return commands

@@ -10,11 +10,15 @@ class Wlan(Switcher):
         self._devices = ["wlan0"]
 
     def powersave(self):
+        commands = []
         for device in self._devices:
-            (Command("/sbin/iw dev %s set power_save on" % device)).run()
+            commands.append("/sbin/iw dev %s set power_save on" % device)
+        return commands
 
 
     def perfomance(self):
+        commands = []
         for device in self._devices:
-            (Command("/sbin/iw dev %s set power_save off" % device)).run()
+            commands.append("/sbin/iw dev %s set power_save off" % device)
+        return commands
 

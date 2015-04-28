@@ -1,3 +1,4 @@
+from Powermanager.Command.Command import Command
 from Powermanager.Switcher.Cpu import Cpu
 from Powermanager.Switcher.Hda import Hda
 from Powermanager.Switcher.Sata import Sata
@@ -11,7 +12,7 @@ from Powermanager.Switcher.Writeback import Writeback
 class Powermanager():
     def __init__(self):
 
-        self._switchers = [];
+        self._switchers = []
         self._switchers.append(Cpu())
         self._switchers.append(Wlan())
         self._switchers.append(Pci())
@@ -28,9 +29,11 @@ class Powermanager():
 
     def __powersave(self):
         for switcher in self._switchers:
-            switcher.powersave()
+            for command in switcher.powersave():
+                (Command(command)).run()
 
 
     def __perfomance(self):
         for switcher in self._switchers:
-            switcher.perfomance()
+            for command in switcher.perfomance():
+                (Command(command)).run()
