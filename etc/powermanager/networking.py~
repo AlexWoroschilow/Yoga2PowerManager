@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+from gi.repository import GLib, NetworkManager, NMClient
+
+main_loop = None
+
+def connections_read(settings):
+    print(settings)
+    main_loop.quit()    
+
+main_loop = GLib.MainLoop()
+settings = NMClient.new(None);
+# wait for connections to be loaded over D-Bus and log
+# them from a callback
+settings.connect("networking-enabled", connections_read)
+main_loop.run()

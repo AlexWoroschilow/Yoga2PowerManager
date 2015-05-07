@@ -1,0 +1,10 @@
+[Unit]
+Description=Powermanager
+
+[Service]
+Type=forking
+ExecStart=/etc/acpi/powermanager-adapter-off.sh
+
+[Install]
+Alias=powermanager.service
+WantedBy=multi-user.target

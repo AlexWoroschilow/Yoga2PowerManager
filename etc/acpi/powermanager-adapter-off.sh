@@ -1,10 +1,8 @@
 #!/bin/sh
 
-for file in /etc/powermanager/*
-do
-	if [ -f $file -a -x $file ]
-	then
-		exec `$file true` >> /dev/null
-	fi
-  
-done
+SCRIPT="/etc/powermanager/powermanager.py"
+
+if [ -f $SCRIPT -a -x $SCRIPT ]
+then
+    exec `$SCRIPT true` >> /dev/null
+fi
