@@ -9,5 +9,5 @@
 # We need to react on "button power.*" and "button/power.*" because
 # of kernel changes.
 
-event=button/wlan WLAN 00000080 00000000 K
-action=/etc/acpi/powermanager-network-toggle.sh
+event=button/lid LID open
+action=/etc/acpi/powermanager-button-lid.sh

@@ -1,8 +1,5 @@
 #!/bin/sh
-
-SCRIPT="/etc/powermanager/powermanager.py"
-
-if [ -f $SCRIPT -a -x $SCRIPT ]
-then
-    exec `$SCRIPT false` >> /dev/null
-fi
+/usr/bin/dbus-send --system --print-reply \
+    --dest="org.sensey.PowerManager"\
+    /org/sensey/PowerManager\
+    org.sensey.PowerManager.Perfomance
