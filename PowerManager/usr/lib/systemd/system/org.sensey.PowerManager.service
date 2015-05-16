@@ -1,13 +1,12 @@
 [Unit]
 Description=PowerManager
-After=syslog.target
 
 [Service]
 Type=dbus
 BusName=org.sensey.PowerManager
-ExecStart=/etc/powermanager/powermanager.py
+ExecStart=/usr/bin/powermanager
 StandardError=null
-Restart=on-abort
+Restart=on-abnormal
 
 [Install]
 WantedBy=multi-user.target

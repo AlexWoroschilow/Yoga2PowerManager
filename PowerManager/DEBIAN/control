@@ -1,0 +1,9 @@
+Package: powermanager
+Version: 0.1
+Section: misc
+Priority: optional
+Architecture: all
+Depends: python3, systemd
+Maintainer: Alex Woroschilow <alex.woroschilow@gmail.com>
+Description: Just an experiment
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+systemctl stop org.sensey.PowerManager
+systemctl disable /usr/lib/systemd/system/org.sensey.PowerManager.service
