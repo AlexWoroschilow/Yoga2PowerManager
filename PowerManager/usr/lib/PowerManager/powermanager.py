@@ -1,20 +1,19 @@
 #!/usr/bin/python3
 
-import dbus
-import dbus.service
+import sys
 from gi.repository import Gtk
 from gi.repository import GObject
 from dbus.mainloop.glib import DBusGMainLoop
 from Powermanager.Service.SenseyPowerManagerService import SenseyPowerManagerService
-from Powermanager.ClientNetworkManager.ClientNetworkManager import ClientNetworkManager
+from Daemonocle import Daemon
+from Powermanager.Powermanager import Powermanager
 
 
-if __name__ == "__main__":
+def main():
     DBusGMainLoop(set_as_default=True)
 
-    bus = dbus.SystemBus()
-    proxy = bus.get_object('org.freedesktop.NetworkManager', '/org/freedesktop/NetworkManager')
-    ClientNetworkManager(proxy, 'org.freedesktop.NetworkManager', SenseyPowerManagerService())
+    service = SenseyPowerManagerService(Powermanager())
+    service.Optimize(None)
 
     loop = GObject.MainLoop()
     loop.run()
@@ -22,4 +21,10 @@ if __name__ == "__main__":
     Gtk.main()
 
 
+if __name__ == "__main__":
+    daemon = Daemon(
+        worker=main,
+        pidfile='/var/run/org.sensey.Powermanager.pid',
+    )
+    daemon.do_action(sys.argv[1])
 

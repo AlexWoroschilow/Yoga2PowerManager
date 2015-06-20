@@ -1,9 +1,8 @@
 /etc/acpi/powermanager-adapter-off.sh
 /etc/acpi/powermanager-adapter-on.sh
 /etc/acpi/powermanager-button-lid.sh
-/etc/acpi/powermanager-button-wlan.sh
 /etc/acpi/events/powermanager-adapter-off
 /etc/acpi/events/powermanager-adapter-on
 /etc/acpi/events/powermanager-button-lid
-/etc/acpi/events/powermanager-button-wlan
 /etc/dbus-1/system.d/org.sensey.PowerManager.conf
+/etc/init/powermanager.conf
