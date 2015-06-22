@@ -1,11 +1,13 @@
 __author__ = 'sensey'
 
-class Switcher():
-    def __init__(self):
-        print('sf')
+from abc import ABCMeta, abstractmethod
 
+
+class Switcher(metaclass=ABCMeta):
+    @abstractmethod
     def powersave(self):
-        print('powersave')
+        pass
 
+    @abstractmethod
     def perfomance(self):
-        print('perfomance')
+        pass

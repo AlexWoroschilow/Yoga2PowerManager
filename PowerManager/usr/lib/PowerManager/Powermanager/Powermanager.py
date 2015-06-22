@@ -1,3 +1,5 @@
+import time
+
 __author__ = 'sensey'
 
 from Powermanager.Command.Command import Command
@@ -11,10 +13,13 @@ from Powermanager.Switcher.Wlan import Wlan
 from Powermanager.Switcher.Writeback import Writeback
 from Powermanager.Switcher.Bluetooth import Bluetooth
 
-class Powermanager():
-    def __init__(self):
 
-        self.__switchers = [
+class Powermanager():
+    def __init__(self, logger):
+
+        self._logger = logger
+
+        self._switchers = [
             Cpu(),
             Wlan(),
             Pci(),
@@ -26,15 +31,22 @@ class Powermanager():
             Bluetooth()
         ]
 
+    @property
+    def logger(self):
+        return self._logger
+
     def powersave(self):
-        for switcher in self.__switchers:
+        self.logger.debug('powersave')
+        for switcher in self._switchers:
             for command in switcher.powersave():
-                self.__run(command)
+                self._run(command)
 
     def perfomance(self):
-        for switcher in self.__switchers:
+        self.logger.debug('perfomance')
+        for switcher in self._switchers:
             for command in switcher.perfomance():
-                self.__run(command)
+                self._run(command)
 
-    def __run(self, command):
+    def _run(self, command):
+        self.logger.info(command)
         (Command(command)).run()
