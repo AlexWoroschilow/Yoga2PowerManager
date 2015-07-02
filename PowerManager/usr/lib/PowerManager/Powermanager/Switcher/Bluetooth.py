@@ -1,8 +1,5 @@
 import os
-from Powermanager.Command.Command import Command
 from Powermanager.Switcher.Switcher import Switcher
-
-__author__ = 'sensey'
 
 
 class Bluetooth(Switcher):

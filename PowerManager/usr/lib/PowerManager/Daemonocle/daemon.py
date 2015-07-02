@@ -245,7 +245,7 @@ class Daemon(object):
         # we can never regain a controlling terminal
         pid = os.fork()
         if pid > 0:
-            time.sleep(1)
+            time.sleep(1) #todo: find another solution without sleep
             # After waiting one second, check to make sure the second
             # child hasn't become a zombie already
             status = os.waitpid(pid, os.WNOHANG)

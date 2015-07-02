@@ -1,7 +1,5 @@
 import glob
 import os.path
-from Powermanager.Command.Command import Command
-
 from Powermanager.Switcher.Switcher import Switcher
 
 

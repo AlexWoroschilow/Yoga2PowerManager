@@ -1,27 +1,29 @@
-import dbus
 import logging
+import dbus
 import dbus.service
-from Powermanager.Service.Client.NetworkManager import NetworkManager
-from Powermanager.Service.Client.UPower import UPower
+
+from DBusService.Client.UPower import UPower
+from DBusService.Client.NetworkManager import NetworkManager
+from Powermanager.Powermanager import Powermanager
 
 
-class SenseyPowerManagerService(dbus.service.Object):
+class PowerManagerService(dbus.service.Object):
     """ Start a Powermanager DBus service, with some custom methods
     to switch a current power mode for computer"""
 
-    def __init__(self, powermanager, logger):
-        self.__name = 'org.sensey.PowerManager'
-        self.__logger = logger
-        self.__power_manager = powermanager
+    def __init__(self, name, filename, level):
+        self.__name = name
+        self.__logger = logging.getLogger(name)
+        logging.basicConfig(level=level, filename=filename)
+
+        self.__power_manager = Powermanager(self.logger)
         self.__bus = dbus.SystemBus()
         self.__bus_name = dbus.service.BusName(self.name, self.__bus)
 
-        self.__upower = UPower(self.__bus, self)
-        self.__network_manager = NetworkManager(self.__bus, self)
+        self.__upower = UPower(self.__bus, self, self.logger)
+        self.__network_manager = NetworkManager(self.__bus, self, self.logger)
 
         dbus.service.Object.__init__(self, self.__bus_name, "/" + self.name.replace('.', '/'))
-
-        self.logger.info('start')
 
     @property
     def name(self):

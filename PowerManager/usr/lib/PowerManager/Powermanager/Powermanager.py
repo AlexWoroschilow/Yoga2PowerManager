@@ -1,7 +1,3 @@
-import time
-
-__author__ = 'sensey'
-
 from Powermanager.Command.Command import Command
 from Powermanager.Switcher.Cpu import Cpu
 from Powermanager.Switcher.Hda import Hda

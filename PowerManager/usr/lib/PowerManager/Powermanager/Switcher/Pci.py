@@ -1,10 +1,7 @@
 import os
-from Powermanager.Command.Command import Command
 from Powermanager.Switcher.Switcher import Switcher
 import glob
 import os.path
-
-__author__ = 'sensey'
 
 
 class Pci(Switcher):

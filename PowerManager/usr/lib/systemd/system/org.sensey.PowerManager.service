@@ -10,5 +10,5 @@ Restart=on-abnormal
 
 [Install]
 WantedBy=multi-user.target
-Alias=org.sensey.PowerManager.service
+Alias=powermanager
 
