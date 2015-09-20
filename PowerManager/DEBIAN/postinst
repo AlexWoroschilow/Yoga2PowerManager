@@ -1,4 +1,17 @@
 #!/bin/sh
 set -e
-deb-systemd-helper enable /usr/lib/systemd/system/org.sensey.PowerManager.service
-deb-systemd-helper start org.sensey.PowerManager
+
+CONFIG="/usr/lib/systemd/system/org.sensey.PowerManager.service"
+SERVICE="powermanager.service"
+
+if which systemctl > /dev/null; then
+    echo "Systemd detected..."
+    systemctl enable $CONFIG
+    systemctl start $SERVICE
+ else
+    echo "No systemd detected..."
+    export _DEB_SYSTEMD_HELPER_DEBUG=1
+    deb-systemd-helper enable $CONFIG
+    deb-systemd-helper start $SERVICE
+fi
+

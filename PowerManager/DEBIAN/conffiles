@@ -4,5 +4,6 @@
 /etc/acpi/events/powermanager-adapter-off
 /etc/acpi/events/powermanager-adapter-on
 /etc/acpi/events/powermanager-button-lid
+/etc/xdg/autostart/indicator-power-manager.desktop
 /etc/dbus-1/system.d/org.sensey.PowerManager.conf
 /etc/init/powermanager.conf
