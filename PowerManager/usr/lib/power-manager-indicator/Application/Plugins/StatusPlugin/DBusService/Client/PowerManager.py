@@ -16,11 +16,13 @@ class PowerManager(dbus.Interface):
     def __init__(self, bus, app):
         self._proxy = bus.get_object('org.sensey.PowerManager', '/org/sensey/PowerManager')
         dbus.Interface.__init__(self, self._proxy, 'org.sensey.PowerManager')
-        self.connect_to_signal("status_changed", app.status_changed)
+        self.connect_to_signal("status_changed", app.refresh)
+
 
     @property
     def statuses(self):
         return json.loads(self.status(True))
+
 
     @property
     def logger(self):
