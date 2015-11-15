@@ -18,6 +18,17 @@ class Powermanager():
 
 
     """
+    Get list of switcher objects,
+    this objects do a switch between 
+    powersave and perfomance mode 
+    for different devices
+    """
+    @property
+    def switchers(self):
+        return self._switchers
+
+
+    """
     try to switch a computer to powersave mode
     use all switchers to get a string command
     than run each command in custom thread
@@ -39,11 +50,6 @@ class Powermanager():
         for switcher in self._switchers:
             for command in switcher.perfomance():
                 self._run(command)
-
-
-    @property
-    def switchers(self):
-        return self._switchers
 
 
     """

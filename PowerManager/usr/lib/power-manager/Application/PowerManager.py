@@ -28,7 +28,6 @@ class PowerManager():
     Start DBus service and DBus listeners
     try to optimize power usage using current context
     """
-
     def service(self):
         DBusGMainLoop(set_as_default=True)
 
@@ -50,25 +49,24 @@ class PowerManager():
     Show all available and enabled modules
     for current power manager context
     """
-
     def modules(self):
         for switcher in self._power_manager.switchers:
             print("Module:\t%10s" % (switcher))
+
 
     """
     Show all current power states over module
     for current power manager context
     """
-
     def states(self):
         for switcher in self._power_manager.switchers:
             print("Module:\t%10s, \tPowersave: %5s" % (switcher, switcher.is_powersave))
+
 
     """
     Show all available devices
     for current power manager context
     """
-
     def devices(self):
         for switcher in self._power_manager.switchers:
             for device in switcher.devices:

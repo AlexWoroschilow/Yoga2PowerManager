@@ -2,10 +2,10 @@ import json
 import logging
 import dbus
 import dbus.service
+import inspect
 
-from DBusService.Client.UPower import UPower
-from DBusService.Client.NetworkManager import NetworkManager
-from Powermanager.Powermanager import Powermanager
+from DBusService.Listeners import *
+import DBusService.Listeners as Client
 
 
 class PowerManagerService(dbus.service.Object):
@@ -13,16 +13,45 @@ class PowerManagerService(dbus.service.Object):
     Start a Powermanager DBus service, with some custom methods
     to switch a current power mode for computer
     """
-    def __init__(self, name, power_manager, logger):
+    def __init__(self, busname, power_manager, logger):
+        self.__power_manager = power_manager
 
         bus = dbus.SystemBus()
 
-        self.__upower = UPower(bus, self, logger)
-        self.__network_manager = NetworkManager(bus, self, logger)
-        self.__power_manager = power_manager
+        self.__listeners = []
+        for (name, module) in inspect.getmembers(Client, inspect.ismodule):
+            if hasattr(module, name):
+                identifier = getattr(module, name)
+                self.__listeners.append(identifier(bus, self, logger))
 
-        dbus.service.Object.__init__(self, dbus.service.BusName(name, bus), "/" + name.replace('.', '/'))
 
+        dbus.service.Object.__init__(self, dbus.service.BusName(busname, bus), "/" + busname.replace('.', '/'))
+
+
+    """
+    Get list of all listeners
+    which listen a system objects over dbus
+    and try to optimize power state with 
+    respect to system condition
+    """
+    @property
+    def listeners(self):
+        return self.__listeners
+
+
+    """
+    Try to identify is system 
+    uses a battery now or AC
+    """
+    @property
+    def is_battery(self):
+        for listener in self.listeners:
+            is_use_battery = listener.is_battery
+            if is_use_battery is not None:
+                if not is_use_battery :
+                    return False
+        return True
+            
 
     """
     DBus method to optimize power usage
@@ -30,10 +59,10 @@ class PowerManagerService(dbus.service.Object):
     """
     @dbus.service.method('org.sensey.PowerManager')
     def optimize(self, options=None):
-        if self.__upower.is_battery():
+        if self.is_battery :
             return self.powersave(options)
         return self.perfomance(options)
-
+        
 
     """
     DBus method to run powersave mode
