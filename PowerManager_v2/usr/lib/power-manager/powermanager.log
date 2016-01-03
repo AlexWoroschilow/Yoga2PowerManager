@@ -1,0 +1,12 @@
+DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7fe36532d9b0>
+DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7fe36532dc18>
+DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7fe366672748>>
+DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7fbb7dc4b908>
+DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7fbb7c905c88>
+DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7fbb7dc4b748>>
+DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7fb82e28a908>
+DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7fb82cf44c88>
+DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7fb82e28a748>>
+DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7f78a5c32d30>
+DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7f78a5c32f98>
+DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7f78a6f1e828>>
