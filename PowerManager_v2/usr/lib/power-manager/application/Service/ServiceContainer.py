@@ -10,7 +10,7 @@ from application.Service.ServiceDBusInterface import ServiceDBusInterface
 from application.Service.ServicePowerManager import ServicePowerManager
 from application.Service.ServiceLogger import ServiceLogger
 
-class ServiceContainer():
+class ServiceContainer(object):
     def __init__(self):
         Inject.configure_once(self.__load)
         service_event_dispatcher = self.get("event_dispatcher")
@@ -45,5 +45,3 @@ class ServiceContainer():
 
     def get(self, name):
         return Inject.instance(name)
-        pass
-        

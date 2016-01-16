@@ -3,14 +3,16 @@ from vendor.Command.Command import Command
 from vendor.Switcher import *
 import vendor.Switcher as Switchers
 from vendor.EventDispatcher import Event
+from application.Service.ContainerAware import ContainerAware
 
-class ServicePowerManager():
+class ServicePowerManager(ContainerAware):
     """
     Initialize a main power manager object
     set up all power switchers
     """
     def __init__(self, container):
-        self.container = container
+        super().__init__(container)
+
         self._switchers = []
         for (name, module) in inspect.getmembers(Switchers, inspect.ismodule):
             identifier = getattr(module, name)
@@ -19,7 +21,7 @@ class ServicePowerManager():
 
 
     def on_loaded(self, event, dispatcher):
-        service_event_dispatcher = self.container.get("event_dispatcher")
+        service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.addListener('app.on_powersafe', self.on_powersafe)
         service_event_dispatcher.addListener('app.on_perfomance', self.on_perfomance)
         pass
@@ -38,7 +40,7 @@ class ServicePowerManager():
         for switcher in self._switchers:
             for command in switcher.powersave():
                 self._run(command)
-        service_event_dispatcher = self.container.get("event_dispatcher")
+        service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_status_changed', Event())
         pass
 
@@ -52,7 +54,7 @@ class ServicePowerManager():
         for switcher in self._switchers:
             for command in switcher.perfomance():
                 self._run(command)
-        service_event_dispatcher = self.container.get("event_dispatcher")
+        service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_status_changed', Event())
         pass
 
