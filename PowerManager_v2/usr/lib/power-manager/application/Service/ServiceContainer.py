@@ -10,6 +10,7 @@ from application.Service.ServiceDBusInterface import ServiceDBusInterface
 from application.Service.ServicePowerManager import ServicePowerManager
 from application.Service.ServiceLogger import ServiceLogger
 
+
 class ServiceContainer(object):
     def __init__(self):
         Inject.configure_once(self.__load)
@@ -19,29 +20,30 @@ class ServiceContainer(object):
         pass
 
     def __load(self, binder):
+        binder.bind("logger", ServiceLogger())
         binder.bind("event_dispatcher", EventDispatcher())
         binder.bind("dubs_interface", ServiceDBusInterface(self))
         binder.bind("power_manager", ServicePowerManager(self))
 
-        pass
-
     def __on_loaded(self, event, dispatcher):
-        service_power_manager = self.get("power_manager")
-        service_dubs_interface = self.get("dubs_interface")
         service_event_dispatcher = self.get("event_dispatcher")
 
+        service_logger = self.get("logger")
+        service_event_dispatcher.addListener('app.on_loaded', service_logger.on_loaded)
+        service_power_manager = self.get("power_manager")
         service_event_dispatcher.addListener('app.on_loaded', service_power_manager.on_loaded)
+        service_dubs_interface = self.get("dubs_interface")
         service_event_dispatcher.addListener('app.on_loaded', service_dubs_interface.on_loaded)
-        pass
 
     def __on_started(self, event, dispatcher):
-        service_power_manager = self.get("power_manager")
-        service_dubs_interface = self.get("dubs_interface")
         service_event_dispatcher = self.get("event_dispatcher")
 
+        service_logger = self.get("logger")
+        service_event_dispatcher.addListener('app.on_loaded', service_logger.on_started)
+        service_power_manager = self.get("power_manager")
         service_event_dispatcher.addListener('app.on_started', service_power_manager.on_started)
-        service_event_dispatcher.addListener('app.on_started', service_dubs_interface.on_started)
-        pass
+        service_dbus_interface = self.get("dubs_interface")
+        service_event_dispatcher.addListener('app.on_started', service_dbus_interface.on_started)
 
     def get(self, name):
         return Inject.instance(name)

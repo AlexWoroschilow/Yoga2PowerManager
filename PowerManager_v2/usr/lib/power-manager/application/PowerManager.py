@@ -14,55 +14,49 @@ class PowerManager(ContainerAware):
         super().__init__(ServiceContainer())
         service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_loaded', Event())
-        pass
-
-    """
-    Show all available and enabled modules
-    for current power manager context
-    """
 
     def start(self):
+        service_logger = self.get("logger")
+        service_logger.debug("[PowerManager] start")
+
         service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_started', Event())
-        pass
 
     def powersave(self):
+        service_logger = self.get("logger")
+        service_logger.debug("[PowerManager] powersave")
+
         service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_powersafe', Event())
-        pass
 
     def perfomance(self):
+        service_logger = self.get("logger")
+        service_logger.debug("[PowerManager] perfomance")
+
         service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_perfomance', Event())
-        pass
-
-    """
-    Show all available and enabled modules
-    for current power manager context
-    """
 
     def modules(self):
-        for switcher in self.get("power_manager").switchers:
-            print("Module:\t%10s" % (switcher))
-        pass
+        service_logger = self.get("logger")
+        service_logger.debug("[PowerManager] modules")
 
-    """
-    Show all current power states over module
-    for current power manager context
-    """
+        service_power_manager = self.get("power_manager")
+        for switcher in service_power_manager.switchers:
+            print("Module:\t%10s" % (switcher))
 
     def status(self):
-        for switcher in self.get("power_manager").switchers:
-            print("Module:\t%10s, \tPowersave: %5s" % (switcher, switcher.is_powersave))
-        pass
+        service_logger = self.get("logger")
+        service_logger.debug("[PowerManager] status")
 
-    """
-    Show all available devices
-    for current power manager context
-    """
+        service_power_manager = self.get("power_manager")
+        for switcher in service_power_manager.switchers:
+            print("Powersave: %5s\t %10s" % (switcher.is_powersave, switcher))
 
     def devices(self):
-        for switcher in self.get("power_manager").switchers:
+        service_logger = self.get("logger")
+        service_logger.debug("[PowerManager] devices")
+
+        service_power_manager = self.get("power_manager")
+        for switcher in service_power_manager.switchers:
             for device in switcher.devices:
                 print("Module:\t%10s, Device: %40s" % (switcher, str(device)))
-        pass
