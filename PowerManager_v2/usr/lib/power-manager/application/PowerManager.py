@@ -51,9 +51,11 @@ class PowerManager(ContainerAware):
         service_logger = self.get("logger")
         service_logger.debug("[PowerManager] modules")
 
+        service_config = self.get("config")
         service_power_manager = self.get("power_manager")
         for switcher in service_power_manager.switchers:
-            print("Module:\t%10s" % (switcher))
+            ignored = service_config.ignored(switcher.name)
+            print("%15s \t%s" % (switcher, ('ignored' if ignored else 'managed')))
 
     def status(self):
         service_logger = self.get("logger")
@@ -61,13 +63,16 @@ class PowerManager(ContainerAware):
 
         service_power_manager = self.get("power_manager")
         for switcher in service_power_manager.switchers:
-            print("Powersave: %5s\t %10s" % (switcher.is_powersave, switcher))
+            powersafe = switcher.is_powersave
+            print("%15s \t%5s" % (switcher, 'powersafe' if powersafe else 'perfomance'))
 
     def devices(self):
         service_logger = self.get("logger")
         service_logger.debug("[PowerManager] devices")
 
+        service_config = self.get("config")
         service_power_manager = self.get("power_manager")
         for switcher in service_power_manager.switchers:
+            ignored = service_config.ignored(switcher.name)
             for device in switcher.devices:
-                print("Module:\t%10s, Device: %40s" % (switcher, str(device)))
+                print("%15s, %55s \t%s" % (switcher, str(device), ('ignored' if ignored else 'managed')))

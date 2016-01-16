@@ -18,6 +18,10 @@ class Wlan(object):
         pass
 
     @property
+    def name(self):
+        return self.__class__.__name__
+
+    @property
     def is_powersave(self):
         for path_device in self.devices:
             if 'on' not in self._run("iw dev %s get power_save" % path_device):

@@ -18,6 +18,10 @@ class Usb(object):
         self._blacklist = ["touchscreen"]
 
     @property
+    def name(self):
+        return self.__class__.__name__
+
+    @property
     def is_powersave(self):
         for device in self.devices:
             if os.path.isfile(str(device)):

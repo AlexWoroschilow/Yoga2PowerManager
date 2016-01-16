@@ -46,12 +46,14 @@ class ServicePowerManager(ContainerAware):
 
     def on_powersafe(self, event, dispatcher):
         service_logger = self.get("logger")
+        service_config = self.get("config")
         service_logger.debug("[ServicePowerManager] on_powersafe")
 
         for switcher in self.switchers:
-            for command in switcher.powersave():
-                service_logger.info("[ServicePowerManager] %s" % command)
-                self._run(command)
+            if not service_config.ignored(switcher.name):
+                for command in switcher.powersave():
+                    service_logger.info("[ServicePowerManager] %s" % command)
+                    self._run(command)
 
         service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_status_changed', Event())
@@ -59,12 +61,14 @@ class ServicePowerManager(ContainerAware):
 
     def on_perfomance(self, event, dispatcher):
         service_logger = self.get("logger")
+        service_config = self.get("config")
         service_logger.debug("[ServicePowerManager] on_perfomance")
 
         for switcher in self.switchers:
-            for command in switcher.perfomance():
-                service_logger.info("[ServicePowerManager] %s" % command)
-                self._run(command)
+            if not service_config.ignored(switcher.name):
+                for command in switcher.perfomance():
+                    service_logger.info("[ServicePowerManager] %s" % command)
+                    self._run(command)
 
         service_event_dispatcher = self.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_status_changed', Event())

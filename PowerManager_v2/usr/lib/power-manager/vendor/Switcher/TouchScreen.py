@@ -19,6 +19,10 @@ class TouchScreen(Usb):
         self._whitelist = ["touchscreen"]
 
     @property
+    def name(self):
+        return self.__class__.__name__
+
+    @property
     def devices(self):
         for path_device in glob.glob("/sys/bus/usb/devices/*"):
             if os.path.isdir(path_device):

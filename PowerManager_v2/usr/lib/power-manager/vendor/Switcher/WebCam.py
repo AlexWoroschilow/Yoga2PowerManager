@@ -17,6 +17,10 @@ class WebCam(object):
         pass
 
     @property
+    def name(self):
+        return self.__class__.__name__
+
+    @property
     def is_powersave(self):
         for path_device in self.devices:
             if len(self._run("lsmod | grep %s" % path_device)) > 0:
