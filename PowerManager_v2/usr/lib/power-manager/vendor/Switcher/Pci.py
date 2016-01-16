@@ -45,7 +45,7 @@ class Pci(object):
         return os.popen(command).read()
 
     def __str__(self):
-        return "PCI switcher"
+        return "PCI"
 
 
 if __name__ == "__main__":

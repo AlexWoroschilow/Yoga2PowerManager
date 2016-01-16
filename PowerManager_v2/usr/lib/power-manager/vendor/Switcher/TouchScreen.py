@@ -29,7 +29,7 @@ class TouchScreen(Usb):
         pass
 
     def __str__(self):
-        return "Touch Screen switcher"
+        return "Touch Screen"
         pass
 
 

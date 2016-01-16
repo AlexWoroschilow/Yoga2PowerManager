@@ -1,12 +1,149 @@
-DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7fe36532d9b0>
-DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7fe36532dc18>
-DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7fe366672748>>
-DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7fbb7dc4b908>
-DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7fbb7c905c88>
-DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7fbb7dc4b748>>
-DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7fb82e28a908>
-DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7fb82cf44c88>
-DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7fb82e28a748>>
-DEBUG:inject:Bound logger to an instance <application.Service.ServiceLogger.ServiceLogger object at 0x7f78a5c32d30>
-DEBUG:inject:Bound power_manager to an instance <application.Service.ServicePowerManager.ServicePowerManager object at 0x7f78a5c32f98>
-DEBUG:inject:Created and configured an injector, config=<bound method ServiceContainer.__load of <application.Service.ServiceContainer.ServiceContainer object at 0x7f78a6f1e828>>
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServicePowerManager] on_loaded
+[ServiceDBusInterface] optimize
+[ServicePowerManager] on_perfomance
+[ServicePowerManager] hciconfig hci0 up;
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor';
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor';
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor';
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor';
+[ServicePowerManager] echo '0' > '/sys/module/snd_hda_intel/parameters/power_save';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:02.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:03.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:14.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:16.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1b.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1c.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1d.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1f.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1f.2/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1f.3/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:01:00.0/power/control';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host0/link_power_management_policy';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host1/link_power_management_policy';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host2/link_power_management_policy';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host3/link_power_management_policy';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-5/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-2/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-4/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-6/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-8/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/usb1/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/usb2/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/usb3/power/control';
+[ServicePowerManager] echo '1' > '/proc/sys/kernel/nmi_watchdog';
+[ServicePowerManager] modprobe uvcvideo;
+[ServicePowerManager] iw dev wlan0 set power_save off;
+[ServicePowerManager] echo '0' > '/proc/sys/vm/dirty_writeback_centisecs';
+[ServiceDBusInterface] status_changed
+[ServicePowerManager] on_perfomance
+[ServicePowerManager] hciconfig hci0 up;
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor';
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor';
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor';
+[ServicePowerManager] echo 'performance' > '/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor';
+[ServicePowerManager] echo '0' > '/sys/module/snd_hda_intel/parameters/power_save';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:02.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:03.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:14.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:16.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1b.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1c.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1d.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1f.0/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1f.2/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:00:1f.3/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/pci/devices/0000:01:00.0/power/control';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host0/link_power_management_policy';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host1/link_power_management_policy';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host2/link_power_management_policy';
+[ServicePowerManager] echo 'medium_power' > '/sys/class/scsi_host/host3/link_power_management_policy';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-5/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-2/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-4/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-6/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/1-8/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/usb1/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/usb2/power/control';
+[ServicePowerManager] echo 'on' > '/sys/bus/usb/devices/usb3/power/control';
+[ServicePowerManager] echo '1' > '/proc/sys/kernel/nmi_watchdog';
+[ServicePowerManager] modprobe uvcvideo;
+[ServicePowerManager] iw dev wlan0 set power_save off;
+[ServicePowerManager] echo '0' > '/proc/sys/vm/dirty_writeback_centisecs';
+[ServiceDBusInterface] status_changed
+MainThread: [ServicePowerManager] on_loaded
+MainThread: [ServicePowerManager] on_loaded
+powermanager: [ServicePowerManager] on_loaded
+powermanager: [ServicePowerManager] on_loaded
+[DEBUG]1452966668.765652 - powermanager-: [ServicePowerManager] on_loaded
+[DEBUG]1452966668.765800 - powermanager-: [ServicePowerManager] on_loaded
+[DEBUG]2016-01-16 18:51:35,742 - powermanager: [ServicePowerManager] on_loaded
+[DEBUG]2016-01-16 18:51:35,742 - powermanager: [ServicePowerManager] on_loaded
+2016-01-16 18:51:48,196 - powermanager: [ServicePowerManager] on_loaded
+2016-01-16 18:51:48,196 - powermanager: [ServicePowerManager] on_loaded
+2016-01-16 18:51:58,804-powermanager[DEBUG]: [ServicePowerManager] on_loaded
+2016-01-16 18:51:58,805-powermanager[DEBUG]: [ServicePowerManager] on_loaded
+2016-01-16 18:52:13,247 - powermanager[DEBUG]: [ServicePowerManager] on_loaded
+2016-01-16 18:52:13,248 - powermanager[DEBUG]: [ServicePowerManager] on_loaded
+2016-01-16 18:52:53,131 - powermanager[DEBUG][ServiceLogger.py]: [ServicePowerManager] on_loaded
+2016-01-16 18:52:53,131 - powermanager[DEBUG][ServiceLogger.py]: [ServicePowerManager] on_loaded
+2016-01-16 18:53:25,011;powermanager;DEBUG;ServiceLogger.py;[ServicePowerManager] on_loaded
+2016-01-16 18:53:25,011;powermanager;DEBUG;ServiceLogger.py;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:53:46,881;powermanager;ServiceLogger.py;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:53:46,881;powermanager;ServiceLogger.py;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:54:14,143;ServiceLogger.py;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:54:14,143;ServiceLogger.py;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:54:34,655;ServiceLogger;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:54:34,655;ServiceLogger;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:54:53,856;debug;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:54:53,857;debug;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:57:21,819;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:57:21,820;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:59:17,258;on_loaded action
+DEBUG;2016-01-16 18:59:17,258;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:59:50,956;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 18:59:50,956;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 18:59:59,163;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 18:59:59,163;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:01:26,309;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:01:26,309;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:01:32,167;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:01:32,168;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:03:39,398;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:03:39,398;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:03:39,398;[PowerManager] modules
+DEBUG;2016-01-16 19:03:48,466;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:03:48,467;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:03:48,467;[PowerManager] devices
+DEBUG;2016-01-16 19:04:02,663;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:04:02,663;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:04:02,663;[PowerManager] status
+DEBUG;2016-01-16 19:04:52,533;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:04:52,533;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:04:52,533;[PowerManager] status
+DEBUG;2016-01-16 19:05:01,638;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:05:01,638;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:05:01,638;[PowerManager] status
+DEBUG;2016-01-16 19:05:08,096;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:05:08,096;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:05:08,096;[PowerManager] status
+DEBUG;2016-01-16 19:05:25,178;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:05:25,178;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:05:25,178;[PowerManager] status
+DEBUG;2016-01-16 19:05:28,513;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:05:28,513;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:05:28,513;[PowerManager] modules
+DEBUG;2016-01-16 19:05:31,370;[ServiceLogger] on_loaded
+DEBUG;2016-01-16 19:05:31,371;[ServicePowerManager] on_loaded
+DEBUG;2016-01-16 19:05:31,371;[PowerManager] devices

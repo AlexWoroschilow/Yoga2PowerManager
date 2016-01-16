@@ -43,7 +43,7 @@ class WriteBack(object):
         return os.popen(command).read()
 
     def __str__(self):
-        return "Dirty writeback switcher"
+        return "Dirty writeback"
 
 
 if __name__ == "__main__":

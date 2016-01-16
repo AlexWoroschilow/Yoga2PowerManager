@@ -45,7 +45,7 @@ class Usb(object):
                 yield "echo 'on' > '%s';" % device.control
 
     def __str__(self):
-        return "USB switcher"
+        return "USB"
 
 
 class UsbDevice(object):
