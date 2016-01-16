@@ -1,45 +1,30 @@
 import glob
 import os.path
-from vendor.Switcher.Usb import Usb
+from vendor.Switcher.Usb import Usb, UsbDevice
 
 
 class TouchScreen(Usb):
     def __init__(self):
-        self._devices = []
+        self._whitelist = ["touchscreen"]
 
-        whitelist = ["touchscreen"]
-        for device in glob.glob("/sys/bus/usb/devices/*"):
-            product_path = "%s/product" % device
-            if os.path.isfile(product_path):
-                file = open(product_path, 'r')
-                product_name = file.read()
-                file.close()
-                if product_name.lower().strip() in whitelist:
-                    power_control = "%s/power/control" % device
-                    if os.path.isfile(power_control):
-                        self._devices.append(power_control)
+    @property
+    def devices(self):
+        for path_device in glob.glob("/sys/bus/usb/devices/*"):
+            if os.path.isdir(path_device):
+                device = UsbDevice(path_device)
+                if os.path.isfile(device.product):
+                    if device.name in self._whitelist:
+                        yield device
+        pass
 
-
-    """
-    Switch to powersave mode all devices,
-    handled by this object, this method already 
-    should return just a list with shell commands
-    """
-    def powersave(self):
-        return []
-
-
-    """
-    Get name of current switcher, 
-    users can see this names, needs to work with 
-    translations for this strings
-    """
     def __str__(self):
-        return "Touch Screen powersave mode"
+        return "Touch Screen switcher"
+        pass
 
 
-    
 if __name__ == "__main__":
-    print((TouchScreen()).devices, (TouchScreen()).is_powersave)
-    print((TouchScreen()).powersave())
-    print((TouchScreen()).perfomance())
+    print((TouchScreen()))
+    print((TouchScreen()).is_powersave)
+    print([str(device) for device in (TouchScreen()).devices])
+    print([str(device) for device in (TouchScreen()).powersave()])
+    print([str(device) for device in (TouchScreen()).perfomance()])

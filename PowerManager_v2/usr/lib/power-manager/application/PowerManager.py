@@ -13,7 +13,7 @@ class PowerManager():
         service_event_dispatcher = self.container.get("event_dispatcher")
         service_event_dispatcher.dispatch('app.on_loaded', Event())
         pass
-    
+
     """
     Show all available and enabled modules
     for current power manager context
@@ -58,5 +58,5 @@ class PowerManager():
     def devices(self):
         for switcher in self.container.get("power_manager").switchers:
             for device in switcher.devices:
-                print("Module:\t%10s, Device: %40s" % (switcher, device))
+                print("Module:\t%10s, Device: %40s" % (switcher, str(device)))
         pass

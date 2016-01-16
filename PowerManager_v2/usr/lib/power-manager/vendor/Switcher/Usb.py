@@ -2,91 +2,77 @@ import glob
 import os.path
 
 
-class Usb():
+class Usb(object):
     def __init__(self):
-        self._powersave = False
-        self._devices = []
+        self._blacklist = ["touchscreen"]
 
-        blacklist = ["touchscreen"]
-        for device in glob.glob("/sys/bus/usb/devices/*"):
-            product_path = "%s/product" % device
-            if os.path.isfile(product_path):
-                file = open(product_path, 'r')
-                product_name = file.read()
-                file.close()
-                if product_name.lower().strip() in blacklist:
-                    continue
-
-            power_control = "%s/power/control" % device
-            if os.path.isfile(power_control):
-                self._devices.append(power_control)
-
-    """
-    Check is all devices, handled by this object
-    are in powersave mode, if on of those is not,
-    that means that all module is not in powersave mode
-    """
     @property
     def is_powersave(self):
-        for power_control in self.devices:
-            if os.path.isfile(power_control):
-                if 'auto' not in self._run("cat %s" % power_control):
+        for device in self.devices:
+            if os.path.isfile(str(device)):
+                if 'auto' not in device.status:
                     return False
         return True
 
-
-    """
-    Get list of devices to handle with
-    """
     @property
     def devices(self):
-        return self._devices
-    
+        for path_device in glob.glob("/sys/bus/usb/devices/*"):
+            if os.path.isdir(path_device):
+                device = UsbDevice(path_device)
+                if os.path.isfile(device.product):
+                    if device.name not in self._blacklist:
+                        yield device
 
-    """
-    Switch to powersave mode all devices,
-    handled by this object, this method already 
-    should return just a list with shell commands
-    """
     def powersave(self):
-        commands = []
         for device in self.devices:
-            if os.path.isfile(device):
-                commands.append("echo 'auto' > '%s';" % device)
-        return commands
+            if os.path.isfile(str(device)):
+                yield "echo 'auto' > '%s';" % device.control
 
-
-    """
-    Enable perfomance mode of devices, 
-    handled by this object, this method already should 
-    return just a list of shell commands
-    """
     def perfomance(self):
-        commands = []
         for device in self.devices:
-            if os.path.isfile(device):
-                commands.append("echo 'on' > '%s';" % device)
-        return commands
+            if os.path.isfile(str(device)):
+                yield "echo 'on' > '%s';" % device.control
 
-
-    """
-    Run command locally, needs to get statuses of devices 
-    and so on, do not use this function to switch device state
-    """
-    def _run(self, command):
-        return os.popen(command).read()
-
-
-    """
-    Get name of current switcher, 
-    users can see this names, needs to work with 
-    translations for this strings
-    """
     def __str__(self):
-        return "USB powersave mode"
-    
-    
+        return "USB switcher"
+
+
+class UsbDevice(object):
+    def __init__(self, path):
+        self.__path = path
+        pass
+
+    @property
+    def name(self):
+        return self.__content(self.product)
+        pass
+
+    @property
+    def status(self):
+        return self.__content(self.control)
+        pass
+
+    @property
+    def control(self):
+        return "%s/power/control" % self.__path
+
+    @property
+    def product(self):
+        return "%s/product" % self.__path
+
+    def __content(self, filename):
+        string = open(filename, 'r').read()
+        if string is not None:
+            return string.lower().strip()
+        return None
+
+    def __str__(self):
+        return str(self.control)
+
+
 if __name__ == "__main__":
-    print((Usb()).devices, (Usb()).is_powersave)
-    print((Usb()).powersave())
-    print((Usb()).perfomance())
+    print((Usb()))
+    print((Usb()).is_powersave)
+    print([str(device) for device in (Usb()).devices])
+    print([str(device) for device in (Usb()).powersave()])
+    print([str(device) for device in (Usb()).perfomance()])
