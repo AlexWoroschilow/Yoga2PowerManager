@@ -1,9 +1,9 @@
-Package: powermanager
-Version: 0.86
+Package: power-manager
+Version: 0.89
 Section: misc
 Priority: optional
 Architecture: all
-Depends: python3, python3-click-cli
+Depends: python3, python3-yaml
 Maintainer: Alex Woroschilow <alex.woroschilow@gmail.com>
 Description: Just an experiment
 

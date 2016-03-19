@@ -1,17 +1,9 @@
 #!/bin/sh
 set -e
 
-CONFIG="/usr/lib/systemd/system/org.sensey.PowerManager.service"
-SERVICE="powermanager.service"
-
-if which systemctl > /dev/null; then
-    echo "Systemd detected..."
-    systemctl stop $SERVICE
-    systemctl disable $CONFIG
- else
-    echo "No systemd detected..."
-    export _DEB_SYSTEMD_HELPER_DEBUG=1
-    deb-systemd-helper stop $SERVICE
-    deb-systemd-helper disable $CONFIG
-fi
+SERVICE="org.sensey.PowerManager"
+echo "stop service..."
+systemctl stop $SERVICE
+echo "disable autostart..."
+systemctl disable $SERVICE
 

@@ -5,12 +5,12 @@ After=NetworkManager.service,upower.service
 [Service]
 Type=dbus
 BusName=org.sensey.PowerManager
-ExecStart=/usr/bin/powermanager
+ExecStart=/usr/bin/power-manager
 KillSignal=SIGKILL
 StandardError=null
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
-Alias=powermanager.service
+Alias=org.sensey.PowerManager
 

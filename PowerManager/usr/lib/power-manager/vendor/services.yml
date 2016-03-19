@@ -1,0 +1,27 @@
+services:
+  config:
+    class: cnf.file.ConfigFile
+    arguments:
+      - "/etc/power-manager/power-manager.ini"
+      - "@event_dispatcher"
+  event_dispatcher:
+    class: evd.event.EventDispatcher
+  power_manager:
+    class: pm.power.PowerManager
+    arguments:
+      - "@config"
+      - "@event_dispatcher"
+      - "@client_dbus_power"
+  client_dbus_power:
+    class: api.power.UPowerClient
+    arguments:
+      - "@event_dispatcher"
+  client_dbus_network_manager:
+    class: api.network.NetworkManagerClient
+    arguments:
+      - "@event_dispatcher"
+  server_dbus_power_manager:
+    class: api.power.PowerManagerServer
+    arguments:
+      - "@event_dispatcher"
+      - "@power_manager"
