@@ -2,7 +2,7 @@ all: deb
 
 
 deb: clean
-	sudo chown -R sensey:sensey build
+	sudo chown -R root:root build
 	mkdir -p build/usr/bin
 	mkdir -p build/usr/lib/power-manager
 	cp -r vendor build/usr/lib/power-manager
@@ -17,7 +17,10 @@ deb: clean
 	sudo chmod +x build/usr/lib/power-manager/power-manager.py
 	sudo chmod +x build/usr/lib/power-manager/power-manager-indicator.py
 	./dpkg-deb-nodot build power-manager
+	sudo chown -R sensey:sensey build
+	rm -rf build/usr/bin
+	rm -rf build/usr/lib/power-manager
 
 clean:
 	rm -rf build/usr/bin
-	rm -rf build/usr/lib
+	rm -rf build/usr/lib/power-manager
