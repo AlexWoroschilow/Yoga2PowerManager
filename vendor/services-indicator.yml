@@ -1,0 +1,22 @@
+services:
+  event_dispatcher:
+    class: evd.event.EventDispatcher
+  client_battery:
+    class: api.power.BatteryClient
+  indicator:
+    class: uix.indicator.IndicatorPowerManager
+    arguments:
+      - "@event_dispatcher"
+      - "@client_dbus_power_manager"
+      - "@client_battery"
+  client_dbus_power_manager:
+    class: api.power.PowerManagerClient
+    arguments:
+      - "@event_dispatcher"
+  updater:
+    class: utl.updater.BackgroundUpdater
+    arguments:
+      - "@event_dispatcher"
+      - 2
+    calls:
+         - [ start, [ ]]

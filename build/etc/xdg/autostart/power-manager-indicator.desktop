@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Indicator Power Manager
+Exec=/usr/bin/power-manager-indicator
+OnlyShowIn=Unity;GNOME;
+NoDisplay=true
+StartupNotify=false
+Terminal=false
+AutostartCondition=GNOME3 unless-session gnome
+X-Ubuntu-Gettext-Domain=power-manager-indicator

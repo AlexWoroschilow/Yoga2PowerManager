@@ -1,19 +1,23 @@
-all: prod
+all: deb
 
 
-prod:
-	sudo chown -R root:root ./PowerManager
-	find PowerManager -name "__pycache__" -exec rm -rf {} \;
-	find PowerManager -name "*.pyc" -exec rm -rf {} \;
-	find PowerManager -type d -exec chmod 0755 {} \;
-	find PowerManager -type f -exec chmod 0644 {} \;
-	sudo chmod 0755 PowerManager/DEBIAN/postinst
-	sudo chmod 0755 PowerManager/DEBIAN/prerm
-	sudo chmod +x PowerManager/usr/lib/power-manager/power-manager.py
-	sudo chmod +x PowerManager/usr/lib/power-manager/power-manager-indicator.py
+deb: clean
+	sudo chown -R sensey:sensey build
+	mkdir -p build/usr/bin
+	mkdir -p build/usr/lib/power-manager
+	cp -r vendor build/usr/lib/power-manager
+	cp power-manager.py build/usr/lib/power-manager
+	cp power-manager-indicator.py build/usr/lib/power-manager
+	ln -rs build/usr/lib/power-manager/power-manager.py build/usr/bin/power-manager
+	ln -rs build/usr/lib/power-manager/power-manager-indicator.py build/usr/bin/power-manager-indicator
+	#find build -name "__pycache__" -exec rm -rf {} \;
+	#find build -name "*.pyc" -exec rm -rf {} \;
+	find build -type d -exec chmod 0755 {} \;
+	find build -type f -exec chmod 0644 {} \;
+	sudo chmod +x build/usr/lib/power-manager/power-manager.py
+	sudo chmod +x build/usr/lib/power-manager/power-manager-indicator.py
+	./dpkg-deb-nodot build power-manager
 
-	./dpkg-deb-nodot ./PowerManager
-	sudo chown -R sensey:sensey ./PowerManager*.deb
-
-dev:
-	sudo chown -R sensey:sensey ./PowerManager
+clean:
+	rm -rf build/usr/bin
+	rm -rf build/usr/lib
