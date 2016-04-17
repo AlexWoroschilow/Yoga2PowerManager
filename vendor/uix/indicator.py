@@ -20,7 +20,8 @@ gi.require_version('AppIndicator3', '0.1')
 from gi.repository.AppIndicator3 import Indicator
 from gi.repository.AppIndicator3 import IndicatorCategory
 from gi.repository.AppIndicator3 import IndicatorStatus
-
+from threading import Thread
+from time import sleep
 
 class IndicatorModuleItem(Gtk.CheckMenuItem):
     _data = None
@@ -66,7 +67,13 @@ class IndicatorPowerManager(object):
         self._indicator.set_status(IndicatorStatus.ACTIVE)
         self._indicator.set_menu(self.menu)
 
-        self.on_refresh_label()
+        def updater():
+            while True:
+                self.on_refresh_label()
+                sleep(5)
+
+        thread = Thread(target=updater)
+        thread.start()
 
     @property
     def menu(self):

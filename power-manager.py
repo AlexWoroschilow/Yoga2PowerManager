@@ -19,9 +19,8 @@ from logging.handlers import RotatingFileHandler
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from optparse import OptionParser
-
-
-sys.path.append('/usr/lib/power-manager/vendor')
+# os.chdir('/usr/lib/power-manager')
+sys.path.append('vendor')
 import ioc
 
 if __name__ == "__main__":
@@ -39,7 +38,7 @@ if __name__ == "__main__":
         RotatingFileHandler(filename=options.logfile, maxBytes=(1024 * 100), backupCount=3)
     ])
 
-    container = ioc.build(['/usr/lib/power-manager/vendor/services.yml'])
+    container = ioc.build(['vendor/services.yml'])
     config = container.get('config')
     manager = container.get('power_manager')
 

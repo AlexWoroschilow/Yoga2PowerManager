@@ -16,6 +16,7 @@ deb: clean
 	find build -type f -exec chmod 0644 {} \;
 	sudo chmod +x build/usr/lib/power-manager/power-manager.py
 	sudo chmod +x build/usr/lib/power-manager/power-manager-indicator.py
+	sudo chmod -R +x build/etc/acpi
 	./dpkg-deb-nodot build power-manager
 	sudo chown -R sensey:sensey build
 	rm -rf build/usr/bin

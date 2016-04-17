@@ -19,6 +19,59 @@ from dbus import DBusException
 from gi.repository import GObject
 
 
+class BatteryClient(object):
+    @property
+    def devices(self):
+        for path in glob.glob("/sys/class/power_supply/BAT?"):
+            yield path
+
+    @property
+    def status(self):
+        for battery in self.devices:
+            with open('%s/power_now' % battery) as stream:
+                content = stream.read()
+                if content is not None:
+                    return float(content) / 1000000
+        return None
+
+    @property
+    def is_battery(self):
+        for battery in self.devices:
+            with open('%s/status' % battery) as stream:
+                content = stream.read()
+                if content is not None:
+                    if content.find('Discharging') is not -1:
+                        return True
+        return False
+
+
+class PowerManagerClient(object):
+    """ listen a  PropertiesChanged-Event from network-manager
+    DBus object  and try to switch to powersave mode
+    @todo: do not switch to powersave mode direct, needs to check
+    other properties like connected ac adapter and something like this,
+    replace Powersave to another Powermanager-enterpoint """
+
+    def __init__(self, dispatcher):
+        self._dispatcher = dispatcher
+        self._dispatcher.add_listener('indicator.module_toggle', self.on_module_toggle)
+
+    @property
+    def client(self):
+        return PowerManagerDBusConnector()
+
+    @property
+    def modules_available(self):
+        return self.client.modules_available
+
+    @property
+    def modules_enabled(self):
+        return self.client.modules_enabled
+
+    def on_module_toggle(self, event, dispatcher):
+        self.client.toggle(event.data.name)
+
+
 class PowerManagerModule(object):
     def __init__(self, module):
         self._name = module['name']
@@ -48,33 +101,7 @@ class PowerManagerModule(object):
         return self.name
 
 
-class BatteryClient(object):
-    @property
-    def devices(self):
-        for path in glob.glob("/sys/class/power_supply/BAT?"):
-            yield path
-
-    @property
-    def status(self):
-        for battery in self.devices:
-            with open('%s/power_now' % battery) as stream:
-                content = stream.read()
-                if content is not None:
-                    return float(content) / 1000000
-        return None
-
-    @property
-    def is_battery(self):
-        for battery in self.devices:
-            with open('%s/status' % battery) as stream:
-                content = stream.read()
-                if content is not None:
-                    if content.find('Discharging') is not -1:
-                        return True
-        return False
-
-
-class UPowerClient(dbus.Interface):
+class UPowerDBusConnector(dbus.Interface):
     def __init__(self, dispatcher=None):
         self._dbus = dbus.SystemBus(mainloop=DBusGMainLoop())
         self._proxy = self._dbus.get_object('org.freedesktop.UPower', '/org/freedesktop/UPower')
@@ -88,17 +115,14 @@ class UPowerClient(dbus.Interface):
         return None
 
 
-class PowerManagerClient(dbus.Interface):
+class PowerManagerDBusConnector(dbus.Interface):
     """ listen a  PropertiesChanged-Event from network-manager
     DBus object  and try to switch to powersave mode
     @todo: do not switch to powersave mode direct, needs to check
     other properties like connected ac adapter and something like this,
     replace Powersave to another Powermanager-enterpoint """
 
-    def __init__(self, dispatcher):
-        self._dispatcher = dispatcher
-        self._dispatcher.add_listener('indicator.module_toggle', self.on_module_toggle)
-
+    def __init__(self):
         self._dbus = dbus.SystemBus(mainloop=DBusGMainLoop())
         self._proxy = self._dbus.get_object('org.sensey.PowerManager', '/org/sensey/PowerManager')
         dbus.Interface.__init__(self, self._proxy, 'org.sensey.PowerManager')
@@ -116,9 +140,6 @@ class PowerManagerClient(dbus.Interface):
         for module in json.loads(self.enabled(True)):
             collection.append(PowerManagerModule(module))
         return collection
-
-    def on_module_toggle(self, event, dispatcher):
-        self.toggle(event.data.name)
 
 
 class PowerManagerServer(dbus.service.Object):
